@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title><!-- EDIT: Replace with your name --> Thamid Ishrak-Portfolio</title>
+  <meta name="description" content="ADD_YOUR_NAME — Developer • Visual Creator • Front-end portfolio (HTML & CSS only)" />
+  <meta name="theme-color" content="#0b0a0a" />
+  <!-- Optional font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================
+       THEME VARIABLES
+       ========================= */
+    :root{
+      --bg-black: #040404;
+      --bg-dark: #0b0b0b;
+      --panel: #121212;
+      --muted: rgba(255,255,255,0.85);
+      --red: #ff2d45;
+      --red-2: #b71f2a;
+      --blue-glow: rgba(56,135,255,0.18);
+      --glass: rgba(255,255,255,0.03);
+      --shadow: 0 18px 50px rgba(0,0,0,0.7);
+      --radius: 14px;
+      --maxw: 1100px;
+      --accent: linear-gradient(90deg, var(--red), var(--red-2));
+    }
+
+    /* Reset */
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%; margin:0; background: linear-gradient(180deg,var(--bg-black), var(--bg-dark)); color:#fff; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; -webkit-font-smoothing:antialiased; line-height:1.4; scroll-behavior:smooth}
+    a{color:inherit; text-decoration:none}
+    img{display:block; max-width:100%}
+
+    /* =========================
+       LIGHT NEON CLOUDS (background)
+       ========================= */
+    .bg-clouds{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+    .cloud {
+      position:absolute; border-radius:50%;
+      filter: blur(56px) saturate(110%); opacity:0.95; mix-blend-mode:screen;
+      animation: float 14s ease-in-out infinite;
+    }
+    .cloud.c1{ width:760px; height:760px; left:-220px; top:-120px; background: radial-gradient(circle at 30% 30%, rgba(255,45,69,0.92), rgba(40,60,160,0.12) 35%, transparent 70%); }
+    .cloud.c2{ width:520px; height:520px; right:-120px; top:18%; background: radial-gradient(circle at 70% 40%, rgba(180,31,43,0.9), rgba(56,135,255,0.08) 45%, transparent 75%); animation-duration:11s; animation-delay:2s }
+    .cloud.c3{ width:360px; height:360px; left:14%; bottom:-120px; background: radial-gradient(circle at 20% 20%, rgba(255,45,69,0.6), rgba(56,135,255,0.12) 45%, transparent 80%); animation-duration:18s; animation-delay:1s }
+    @keyframes float { 0%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-18px) rotate(3deg)} 100%{transform:translateY(0) rotate(0)} }
+
+    /* =========================
+       WRAPPER & LAYOUT
+       ========================= */
+    .wrap{ position:relative; z-index:2; max-width:var(--maxw); margin:36px auto; padding:28px; }
+    header{ display:flex; gap:16px; align-items:center; justify-content:space-between; margin-bottom:28px; }
+    .brand{ display:flex; gap:12px; align-items:center }
+    .brand .mini{ width:56px; height:56px; border-radius:12px; overflow:hidden; border:2px solid rgba(255,255,255,0.03); box-shadow: 0 12px 40px rgba(0,0,0,0.6) }
+    .brand h1{ margin:0; font-size:1.05rem; font-weight:800; letter-spacing:0.2px }
+    .brand p{ margin:0; font-size:0.82rem; color:var(--muted); font-weight:700 }
+
+    nav{ display:flex; gap:12px; align-items:center }
+    nav a{ color:var(--muted); padding:8px 12px; border-radius:10px; font-weight:700; transition: all .22s }
+    nav a:hover{ color:#fff; transform:translateY(-4px); background:var(--glass); box-shadow: 0 10px 30px var(--blue-glow) }
+
+    .cta-download{ padding:10px 14px; border-radius:12px; background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted); font-weight:800; transition:transform .2s }
+    .cta-download:hover{ transform:translateY(-4px); box-shadow: 0 18px 50px var(--blue-glow); color:#fff }
+
+    /* =========================
+       HERO: left text / right portrait
+       ========================= */
+    .hero{ display:grid; grid-template-columns: 1fr 440px; gap:28px; align-items:center; margin-bottom:32px; }
+    .intro h2{ font-size: clamp(30px, 4.4vw, 48px); margin:0; line-height:1; font-weight:800; letter-spacing:-0.6px }
+    .intro h2 .name{ color:var(--red); display:inline-block; padding-right:6px; text-shadow: 0 6px 30px rgba(178,31,43,0.08) }
+    .tag{ display:block; margin-top:8px; color:var(--muted); font-weight:700 }
+    .intro p{ color:var(--muted); margin:16px 0; max-width:720px }
+
+    .ctas{ display:flex; gap:12px; flex-wrap:wrap }
+    .btn{
+      padding:12px 18px; border-radius:12px; font-weight:800; cursor:pointer; border:none; display:inline-flex; gap:10px; align-items:center;
+      transition: transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s;
+    }
+    .btn.primary{ background: var(--accent); color:#fff; box-shadow: 0 18px 50px rgba(178,31,43,0.12)}
+    .btn.secondary{ background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted) }
+    .btn.primary:hover{ transform:translateY(-6px) scale(1.02); box-shadow: 0 30px 80px rgba(56,135,255,0.12) }
+    .btn.secondary:hover{ transform:translateY(-4px); box-shadow: 0 20px 40px rgba(56,135,255,0.06) }
+
+    /* portrait */
+    .portrait{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:18px; border-radius:22px; display:flex; align-items:center; justify-content:center; box-shadow: var(--shadow); border:1px solid rgba(255,255,255,0.03); position:relative }
+    .frame{ width:350px; height:450px; border-radius:40px; overflow:hidden; position:relative; border:6px solid rgba(0,0,0,0.35) }
+    .frame img{ width:100%; height:100%; object-fit:cover; display:block; transform: scale(1); transition: transform .8s cubic-bezier(.2,.9,.3,1); }
+    .frame::after{
+      content:""; position:absolute; inset:auto -32px -20px auto; width:260px; height:260px; border-radius:50%; background: radial-gradient(circle at 30% 30%, rgba(255,45,69,0.18), rgba(56,135,255,0.12) 40%, transparent 70%); filter: blur(26px); transform: translate(6px,18px); z-index:0; animation: spin 18s linear infinite;
+    }
+    @keyframes spin { from{ transform: translate(6px,18px) rotate(0deg)} to{ transform: translate(6px,18px) rotate(360deg)} }
+    .frame:hover img{ transform: scale(1.03); filter: drop-shadow(0 24px 60px rgba(56,135,255,0.12)); }
+
+    /* small chips */
+    .chips{ display:flex; gap:10px; margin-top:14px; flex-wrap:wrap }
+    .chip{ background:var(--glass); padding:8px 12px; border-radius:10px; color:var(--muted); font-weight:700; border:1px solid rgba(255,255,255,0.03) }
+
+    /* =========================
+       SECTIONS
+       ========================= */
+    section.card{ margin-top:18px; padding:18px; border-radius:14px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); box-shadow: 0 18px 60px rgba(0,0,0,0.6); }
+
+    .flex-row{ display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap }
+
+    /* Skills */
+    .skills-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:12px }
+    .skill{ padding:14px; border-radius:10px; background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); text-align:center; font-weight:800; color:var(--muted); transition: transform .22s, box-shadow .22s }
+    .skill:hover{ transform:translateY(-8px); box-shadow: 0 24px 60px var(--blue-glow) }
+
+    /* Services */
+    .services-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:12px }
+    .service{ padding:14px; border-radius:12px; background:var(--panel); border:1px solid rgba(255,255,255,0.03); transition: transform .22s, box-shadow .22s }
+    .service:hover{ transform:translateY(-10px); box-shadow: 0 28px 70px var(--blue-glow) }
+
+    /* Projects: dashboard style */
+    .projects-wrap{ display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap }
+    .proj-sidebar{ width:240px; min-width:200px; background: var(--panel); padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,0.03); box-shadow: 0 12px 40px rgba(0,0,0,0.6); }
+    .proj-list{ display:flex; flex-direction:column; gap:8px; margin-top:10px }
+    .proj-item{ padding:10px; border-radius:10px; font-weight:700; color:var(--muted); background:transparent; transition: background .18s, transform .18s; cursor:pointer }
+    .proj-item:hover{ background: linear-gradient(90deg, rgba(255,45,69,0.06), rgba(0,0,0,0.04)); transform:translateX(6px) }
+
+    .proj-grid{ flex:1; display:grid; grid-template-columns:repeat(2,1fr); gap:14px }
+    .card-project{ border-radius:12px; overflow:hidden; position:relative; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); transition: transform .22s, box-shadow .22s }
+    .card-project:hover{ transform:translateY(-10px) scale(1.01); box-shadow: 0 30px 80px rgba(0,0,0,0.6) }
+    .card-thumb{ height:160px; background: linear-gradient(90deg, var(--red), var(--red-2)); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:1.05rem; color:#fff; position:relative }
+    .card-thumb::after{ content:""; position:absolute; inset:0; box-shadow: 0 24px 60px var(--blue-glow); opacity:0.9; pointer-events:none }
+    .card-body{ padding:12px }
+    .card-body h5{ margin:0 0 6px 0 }
+    .card-body p{ margin:0; color:var(--muted); font-size:0.95rem }
+
+    /* Use details/summary to expand without JS */
+    details{ margin-top:10px; border-radius:8px; padding:10px; background: rgba(255,255,255,0.01); border:1px solid rgba(255,255,255,0.02) }
+    summary{ cursor:pointer; font-weight:700 }
+
+    /* Contact */
+    .contact-grid{ display:grid; grid-template-columns:1fr 320px; gap:18px }
+    .input, textarea{ width:100%; padding:12px; border-radius:10px; border:1px solid rgba(255,255,255,0.04); background:transparent; color:#fff; margin-bottom:10px }
+    .send{ padding:12px 16px; border-radius:10px; background: linear-gradient(90deg, var(--red), var(--red-2)); font-weight:800; border:none; color:#fff; cursor:pointer; box-shadow: 0 18px 60px var(--blue-glow) }
+
+    footer{ margin-top:22px; text-align:center; color:var(--muted); font-size:0.95rem }
+
+    /* =========================
+       RESPONSIVE
+       ========================= */
+    @media (max-width:1000px){
+      .hero{ grid-template-columns:1fr 360px }
+      .proj-grid{ grid-template-columns:repeat(1,1fr) }
+      .skills-grid{ grid-template-columns:repeat(2,1fr) }
+      .services-grid{ grid-template-columns:repeat(2,1fr) }
+    }
+    @media (max-width:720px){
+      header{ flex-direction:column; align-items:flex-start; gap:12px }
+      nav{ display:none }
+      .hero{ grid-template-columns:1fr; gap:18px }
+      .portrait{ order:-1; width:100% }
+      .proj-sidebar{ display:none }
+      .contact-grid{ grid-template-columns:1fr }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- BACKGROUND CLOUDS (pure CSS visuals) -->
+  <div class="bg-clouds" aria-hidden="true">
+    <div class="cloud c1"></div>
+    <div class="cloud c2"></div>
+    <div class="cloud c3"></div>
+  </div>
+
+  <div class="wrap">
+    <!-- HEADER -->
+    <header>
+      <div class="brand" aria-label="Brand">
+        <!-- EDIT: Put your portrait image named 'your-photo.png' in the same folder -->
+        <div class="mini"><img src="tanim logo.png" alt="anime boy picture" style="width:100%;height:100%;object-fit:cover" /></div>
+        <div>
+          <h1><!-- EDIT: NAME --> Tahmid Ishrak</h1>
+          <p>Developer</p>
+        </div>
+      </div>
+
+      <nav aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <!-- Download CV placeholder -->
+      <a class="cta-download" href="/cv.pdf" title="Download CV (placeholder)">Download CV</a>
+    </header>
+
+    <!-- HERO -->
+    <main id="hero" class="hero" role="main" aria-labelledby="hero-title">
+      <div class="intro">
+        <h2 id="hero-title">Hi, I'm <span class="name"><!-- EDIT: NAME --> Tahmid Ishrak</span></h2>
+        <div class="tag">Young Developer • Visual Creator • Front-end Enthusiast</div>
+
+        <p>
+          <!-- EDIT: Short bio -->
+          I'm young developer and automation builder from Bangladesh. I'm works with,front‑end development, and creative web animations. Skilled in HTML, CSS, JavaScript, and modern UI design, i'm builds interactive websites, portfolio projects, and AI‑powered chatbots. i'm focus is on front‑end experiences simple, engaging, and professional.।
+        </p>
+
+        <div class="ctas">
+          <a class="btn primary" href="#projects">View Projects</a>
+          <a class="btn secondary" href="#contact">Get in touch</a>
+        </div>
+
+        <div class="chips" aria-hidden="false">
+          <!-- EDIT: Contact placeholders -->
+          <div class="chip">📞 +8801911264246</div>
+          <div class="chip">✉️ tahmidishraktanim3@gmail.com</div>
+          <div class="chip">📍 Khilkhet,Dhaka-1229</div>
+        </div>
+      </div>
+
+      <!-- PORTRAIT -->
+      <aside class="portrait" aria-label="Portrait">
+        <div class="frame" role="img" aria-label="Your portrait">
+          <!-- EDIT: Replace your-photo.png with your own image file -->
+          <img src="anime.png" alt="anime boy picture" />
+        </div>
+      </aside>
+    </main>
+
+    <!-- ABOUT -->
+    <section id="about" class="card" aria-labelledby="about-title">
+      <h3 id="about-title">About</h3>
+      <div class="flex-row">
+        <div style="flex:1; min-width:260px">
+          <p class="muted">
+            <!-- EDIT: longer bio -->
+            My lifelong aim is to become a full‑stack developer and building smart systems that connect people and businesses. my focus is on front‑end design, back‑end logic, and AI automation with tools like n8n. I wants to create technology that is simple, scalable, and helpful for everyone — turning ideas into permanent solution
+          </p>
+
+          <div class="skills-grid">
+            <div class="skill">HTML</div>
+            <div class="skill">CSS (advanced)</div>
+            <div class="skill">Responsive Design</div>
+            <div class="skill">UI Animation</div>
+            <div class="skill">Figma / Prototyping</div>
+            <div class="skill">Basic Git</div>
+          </div>
+        </div>
+
+        <div style="width:300px; min-width:220px">
+          <div style="font-weight:800; color:var(--muted)">Quick Info</div>
+          <div style="margin-top:10px; font-weight:700">
+            <div>Name: <!-- EDIT: NAME --> Tahmid Ishrak</div>
+            <div>Email: <!-- EDIT: EMAIL --> tahmidishraktanim3@gmail.com</div>
+            <div>Phone: <!-- EDIT: PHONE --> +8801911264246</div>
+            <div>Location: <!-- EDIT: ADDRESS --> Khilkhet.Dhaka-1229</div>
+          </div>
+
+          <div style="margin-top:14px">
+            <a class="btn primary" href="#contact">Hire / Contact</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="card" aria-labelledby="services-title">
+      <h3 id="services-title">Services</h3>
+      <div class="services-grid">
+        <div class="service"><strong>Front-end UI</strong><div class="muted">HTML/CSS layouts, responsive pages</div></div>
+        <div class="service"><strong>Motion UI</strong><div class="muted">CSS animations &amp; visual interactions</div></div>
+        <div class="service"><strong>Portfolio Design</strong><div class="muted">Personal sites &amp; presentation assets</div></div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="card" aria-labelledby="skills-title">
+      <h3 id="skills-title">Skills</h3>
+      <div class="skills-grid" style="margin-top:10px">
+        <div class="skill">CSS Animations</div>
+        <div class="skill">Responsive Layout</div>
+        <div class="skill">Design Systems</div>
+        <div class="skill">Prototyping</div>
+        <div class="skill">Version Control (basic)</div>
+        <div class="skill">Workflow &amp; Iteration</div>
+      </div>
+    </section>
+
+    <!-- PROJECTS (dashboard-style) -->
+    <section id="projects" class="card" aria-labelledby="projects-title">
+      <h3 id="projects-title">Projects</h3>
+      <div class="projects-wrap">
+        <!-- Sidebar -->
+        <aside class="proj-sidebar" aria-label="Project sidebar">
+          <h4>My Projects</h4>
+          <div class="proj-list">
+            <!-- EDIT: change these titles -->
+            <div class="proj-item">Short Animation Scene</div>
+            <div class="proj-item">Motion Poster</div>
+            <div class="proj-item">Portfolio Redesign</div>
+            <div class="proj-item">Storyboard Pack</div>
+          </div>
+
+          <div style="margin-top:14px; font-size:0.9rem; color:var(--muted)">
+            <!-- EDIT: developer note -->
+            <!-- Edit the project titles here and update the right-side cards below. Replace card thumbnails with images by putting <img> inside .card-thumb. -->
+          </div>
+        </aside>
+
+        <!-- Project cards -->
+        <div class="proj-grid" aria-live="polite">
+          <!-- Project card 1 -->
+          <article class="card-project">
+            <div class="card-thumb" role="img" aria-label="Project 1 thumbnail">Project 1</div>
+            <div class="card-body">
+              <h5>Short Animation Scene</h5>
+              <p class="muted">A short character animation exploring timing and expression. Tools: Krita, AE.</p>
+              <details>
+                <summary>Read more</summary>
+                <div class="muted" style="margin-top:8px">ADD_LONGER_DESCRIPTION_HERE. Replace with a link to your hosted video or an image path (e.g., &lt;img src='path' alt='...'/&gt;).</div>
+              </details>
+            </div>
+          </article>
+
+          <!-- Project card 2 -->
+          <article class="card-project">
+            <div class="card-thumb">Project 2</div>
+            <div class="card-body">
+              <h5>Motion Poster</h5>
+              <p class="muted">Animated poster with parallax layers for social media.</p>
+              <details>
+                <summary>Read more</summary>
+                <div class="muted" style="margin-top:8px">ADD_LONGER_DESCRIPTION_HERE. Use image/video links if available.</div>
+              </details>
+            </div>
+          </article>
+
+          <!-- Project card 3 -->
+          <article class="card-project">
+            <div class="card-thumb">Project 3</div>
+            <div class="card-body">
+              <h5>Portfolio Redesign</h5>
+              <p class="muted">A responsive portfolio layout built with HTML &amp; CSS only.</p>
+              <details>
+                <summary>Read more</summary>
+                <div class="muted" style="margin-top:8px">ADD_LONGER_DESCRIPTION_HERE. Mention your role and tools.</div>
+              </details>
+            </div>
+          </article>
+
+          <!-- Project card 4 -->
+          <article class="card-project">
+            <div class="card-thumb">Project 4</div>
+            <div class="card-body">
+              <h5>Storyboard Pack</h5>
+              <p class="muted">Storyboard sheets and thumbnails for short scenes.</p>
+              <details>
+                <summary>Read more</summary>
+                <div class="muted" style="margin-top:8px">ADD_LONGER_DESCRIPTION_HERE. Describe length, tools and takeaway.</div>
+              </details>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="card" aria-labelledby="contact-title">
+      <h3 id="contact-title">Contact</h3>
+      <div class="contact-grid">
+        <div>
+          <!-- <p class="muted">This contact form is frontend-only (no backend). To enable messages later use Formspree, Netlify Forms or add a backend endpoint.</p> -->
+
+          <!-- Frontend-only form (disabled) -->
+          <!-- <form action="#" onsubmit="return false;">
+            <input class="input" type="text" placeholder="Your name" aria-label="Your name" />
+            <input class="input" type="email" placeholder="you@example.com" aria-label="Your email" />
+            <textarea class="input" rows="5" placeholder="Message" aria-label="Message"></textarea>
+            <button class="send" type="button">Send Message (frontend only)</button>
+          </form> -->
+        </div>
+
+        <aside>
+          <div style="background:var(--glass); padding:14px; border-radius:12px; border:1px solid rgba(255,255,255,0.03)">
+            <div style="font-weight:800">Email</div>
+            <div class="muted"><!-- EDIT: EMAIL --> tahmidishraktanim3@gmail.com</div>
+
+            <div style="margin-top:10px; font-weight:800">Phone</div>
+            <div class="muted"><!-- EDIT: PHONE --> =880191124246</div>
+
+            <div style="margin-top:10px; font-weight:800">Address</div>
+            <div class="muted"><!-- EDIT: ADDRESS --> Khilkhet,Dhaka-1229</div>
+          </div>
+
+          <div style="margin-top:12px; font-size:0.9rem; color:var(--muted)">
+            Tip: upload this file + your-photo.png to GitHub Pages / Netlify / Vercel for a static deploy (no backend needed).
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year">2025</span> <!-- EDIT: NAME --> tahmid ishrak — Built with ❤️ — Edit this file to personalize.
+    </footer>
+  </div>
+
+  <!--
+    ===== QUICK EDIT GUIDE =====
+    - Replace all placeholders: ADD_YOUR_NAME, ADD_YOUR_EMAIL, ADD_YOUR_PHONE, ADD_YOUR_ADDRESS.
+    - Put your portrait image as 'your-photo.png' in the same folder.
+    - To change color balance: edit --red and --red-2 in :root. For stronger blue shadow change --blue-glow rgba value.
+    - Replace project card text and add images: put <img src="path" alt="..."> inside .card-thumb to use thumbnails.
+    - Contact form is frontend-only. To enable, set <form action="YOUR_ENDPOINT"> and remove onsubmit="return false;".
+    - Find all edit points by searching for '<!-- EDIT:' comments.
+    - No JavaScript used — all animations and interactions are CSS-only so it's safe and simple to edit.
+  -->
+</body>
+</html>
